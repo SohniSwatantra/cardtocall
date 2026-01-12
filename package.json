@@ -17,6 +17,9 @@
   "keywords": ["conference", "business-card", "scanner", "contacts"],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0"
+  },
   "devDependencies": {
     "concurrently": "^8.2.2"
   }

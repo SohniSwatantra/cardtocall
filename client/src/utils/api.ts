@@ -1,5 +1,30 @@
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
+export interface AnalyzedContact {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  job_title: string;
+  address: string;
+  website: string;
+}
+
+export async function analyzeCard(imageData: string): Promise<AnalyzedContact> {
+  const response = await fetch(`${API_BASE}/api/analyze-card`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ image: imageData }),
+  });
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Failed to analyze card' }));
+    throw new Error(error.error || 'Failed to analyze card');
+  }
+  return response.json();
+}
+
 export interface Contact {
   id: number;
   name: string;

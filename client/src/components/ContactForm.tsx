@@ -1,6 +1,15 @@
 import { useState } from 'react';
-import type { ParsedContact } from '../utils/parseContact';
 import './ContactForm.css';
+
+export interface ParsedContact {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  jobTitle: string;
+  address: string;
+  website: string;
+}
 
 interface ContactFormProps {
   initialData: ParsedContact;

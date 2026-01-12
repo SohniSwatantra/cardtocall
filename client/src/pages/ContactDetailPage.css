@@ -1,0 +1,35 @@
+.contact-detail-page {
+  width: 100%;
+}
+
+.back-link {
+  display: inline-block;
+  color: #646cff;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.contact-detail-card {
+  background-color: #2a2a3e;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.contact-detail-card h1 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.contact-id {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+}
+
+.coming-soon {
+  color: #a0a0a0;
+  font-style: italic;
+}

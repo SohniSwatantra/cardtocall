@@ -1,0 +1,40 @@
+.contacts-page {
+  width: 100%;
+}
+
+.contacts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.contacts-header h1 {
+  margin: 0;
+}
+
+.contacts-empty {
+  text-align: center;
+  padding: 3rem;
+  background-color: #2a2a3e;
+  border-radius: 12px;
+}
+
+.empty-icon {
+  color: #646cff;
+  margin-bottom: 1rem;
+}
+
+.contacts-empty p {
+  color: #a0a0a0;
+  margin-bottom: 1rem;
+}
+
+.scan-link {
+  color: #646cff;
+  text-decoration: none;
+}
+
+.scan-link:hover {
+  text-decoration: underline;
+}

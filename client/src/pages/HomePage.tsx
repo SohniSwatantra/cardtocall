@@ -1,10 +1,8 @@
 import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createWorker } from 'tesseract.js';
 import CameraCapture from '../components/CameraCapture';
-import ContactForm from '../components/ContactForm';
-import { parseContactFromText, type ParsedContact } from '../utils/parseContact';
-import { createContact } from '../utils/api';
+import ContactForm, { type ParsedContact } from '../components/ContactForm';
+import { createContact, analyzeCard } from '../utils/api';
 import './HomePage.css';
 
 type ScanState = 'camera' | 'processing' | 'review' | 'saving' | 'success' | 'error';
@@ -13,34 +11,31 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [scanState, setScanState] = useState<ScanState>('camera');
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const [extractedText, setExtractedText] = useState<string>('');
   const [parsedContact, setParsedContact] = useState<ParsedContact | null>(null);
-  const [ocrProgress, setOcrProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
   const processImage = useCallback(async (imageData: string) => {
     setScanState('processing');
-    setOcrProgress(0);
 
     try {
-      const worker = await createWorker('eng', 1, {
-        logger: (m) => {
-          if (m.status === 'recognizing text') {
-            setOcrProgress(Math.round(m.progress * 100));
-          }
-        },
-      });
+      const result = await analyzeCard(imageData);
 
-      const { data } = await worker.recognize(imageData);
-      await worker.terminate();
+      // Map snake_case API response to camelCase for the form
+      const contact: ParsedContact = {
+        name: result.name || '',
+        email: result.email || '',
+        phone: result.phone || '',
+        company: result.company || '',
+        jobTitle: result.job_title || '',
+        address: result.address || '',
+        website: result.website || '',
+      };
 
-      setExtractedText(data.text);
-      const contact = parseContactFromText(data.text);
       setParsedContact(contact);
       setScanState('review');
     } catch (err) {
-      console.error('OCR error:', err);
-      setError('Failed to process image. Please try again.');
+      console.error('Analysis error:', err);
+      setError(err instanceof Error ? err.message : 'Failed to analyze image. Please try again.');
       setScanState('error');
     }
   }, []);
@@ -52,7 +47,6 @@ export default function HomePage() {
 
   const handleRetake = useCallback(() => {
     setCapturedImage(null);
-    setExtractedText('');
     setParsedContact(null);
     setError(null);
     setScanState('camera');
@@ -82,7 +76,6 @@ export default function HomePage() {
 
   const handleScanAnother = useCallback(() => {
     setCapturedImage(null);
-    setExtractedText('');
     setParsedContact(null);
     setError(null);
     setScanState('camera');
@@ -111,11 +104,8 @@ export default function HomePage() {
           </div>
           <div className="processing-info">
             <div className="spinner"></div>
-            <h2>Extracting text...</h2>
-            <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${ocrProgress}%` }}></div>
-            </div>
-            <p>{ocrProgress}% complete</p>
+            <h2>Analyzing card...</h2>
+            <p>Using AI to extract contact information</p>
           </div>
         </div>
       )}
@@ -125,10 +115,6 @@ export default function HomePage() {
           <div className="review-layout">
             <div className="image-preview">
               {capturedImage && <img src={capturedImage} alt="Captured card" />}
-              <details className="extracted-text">
-                <summary>View extracted text</summary>
-                <pre>{extractedText}</pre>
-              </details>
             </div>
             <ContactForm
               initialData={parsedContact}

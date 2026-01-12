@@ -1,12 +1,12 @@
 # CardToCall
 
-A conference networking app that lets you scan business cards with your phone camera and automatically extract contact information using OCR.
+A conference networking app that lets you scan business cards with your phone camera and automatically extract contact information using AI.
 
 ## Features
 
 - **Camera Scanning** - Use your device camera to capture business cards
-- **OCR Text Extraction** - Automatically extracts text using Tesseract.js
-- **Smart Parsing** - Intelligently identifies name, email, phone, company, job title, address, and website
+- **AI-Powered Extraction** - Uses Claude AI to accurately extract contact details from card images
+- **Smart Recognition** - Identifies name, email, phone, company, job title, address, and website
 - **Notes & Tags** - Add context notes and tags to organize contacts (e.g., "TechConf 2024", "Follow up")
 - **Search & Filter** - Find contacts by name, email, company, or filter by tags
 - **Export Options** - Download all contacts as CSV or individual contacts as vCard (.vcf)
@@ -16,7 +16,7 @@ A conference networking app that lets you scan business cards with your phone ca
 - **Frontend**: React 19 + TypeScript + Vite
 - **Backend**: Netlify Functions (serverless)
 - **Database**: Neon PostgreSQL (serverless)
-- **OCR**: Tesseract.js (client-side)
+- **AI**: Claude API (Anthropic) for image analysis
 
 ## Deploy to Netlify
 
@@ -37,9 +37,10 @@ A conference networking app that lets you scan business cards with your phone ca
    - **Build command**: `npm run build`
    - **Publish directory**: `client/dist`
 
-5. Add environment variable in **Site Settings → Environment Variables**:
+5. Add environment variables in **Site Settings → Environment Variables**:
    ```
    DATABASE_URL = postgresql://user:password@host/database?sslmode=require
+   ANTHROPIC_API_KEY = sk-ant-api03-your-key-here
    ```
 
 6. Deploy!

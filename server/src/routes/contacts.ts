@@ -69,6 +69,86 @@ router.get('/', async (_req: Request, res: Response) => {
   }
 });
 
+// Search contacts by name, email, company with optional tag filtering
+router.get('/search', async (req: Request, res: Response) => {
+  try {
+    const { q, tags } = req.query;
+    const searchQuery = typeof q === 'string' ? q.trim() : '';
+    const tagsParam = typeof tags === 'string' ? tags : '';
+
+    // Parse tags filter (comma-separated)
+    const tagFilters = tagsParam ? tagsParam.split(',').map(t => t.trim()).filter(Boolean) : [];
+
+    let result;
+
+    if (searchQuery && tagFilters.length > 0) {
+      // Search with both query and tags filter
+      const searchPattern = `%${searchQuery}%`;
+      result = await sql`
+        SELECT *,
+          CASE
+            WHEN LOWER(name) LIKE LOWER(${searchPattern}) THEN 3
+            WHEN LOWER(email) LIKE LOWER(${searchPattern}) THEN 2
+            WHEN LOWER(company) LIKE LOWER(${searchPattern}) THEN 1
+            ELSE 0
+          END as relevance
+        FROM contacts
+        WHERE (
+          LOWER(name) LIKE LOWER(${searchPattern})
+          OR LOWER(email) LIKE LOWER(${searchPattern})
+          OR LOWER(company) LIKE LOWER(${searchPattern})
+        )
+        AND tags && ${tagFilters}
+        ORDER BY relevance DESC, created_at DESC
+      `;
+    } else if (searchQuery) {
+      // Search by query only
+      const searchPattern = `%${searchQuery}%`;
+      result = await sql`
+        SELECT *,
+          CASE
+            WHEN LOWER(name) LIKE LOWER(${searchPattern}) THEN 3
+            WHEN LOWER(email) LIKE LOWER(${searchPattern}) THEN 2
+            WHEN LOWER(company) LIKE LOWER(${searchPattern}) THEN 1
+            ELSE 0
+          END as relevance
+        FROM contacts
+        WHERE LOWER(name) LIKE LOWER(${searchPattern})
+          OR LOWER(email) LIKE LOWER(${searchPattern})
+          OR LOWER(company) LIKE LOWER(${searchPattern})
+        ORDER BY relevance DESC, created_at DESC
+      `;
+    } else if (tagFilters.length > 0) {
+      // Filter by tags only
+      result = await sql`
+        SELECT *, 0 as relevance
+        FROM contacts
+        WHERE tags && ${tagFilters}
+        ORDER BY created_at DESC
+      `;
+    } else {
+      // No filters - return all contacts
+      result = await sql`
+        SELECT *, 0 as relevance
+        FROM contacts
+        ORDER BY created_at DESC
+      `;
+    }
+
+    // Remove the relevance column from response
+    const contacts = result.map((row) => {
+      const { relevance, ...contact } = row as { relevance: number } & Contact;
+      return contact;
+    });
+
+    res.json(contacts);
+  } catch (error) {
+    console.error('Error searching contacts:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    res.status(500).json({ error: 'Failed to search contacts', details: message });
+  }
+});
+
 // Get a single contact by ID
 router.get('/:id', async (req: Request, res: Response) => {
   try {

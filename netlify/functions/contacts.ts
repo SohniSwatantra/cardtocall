@@ -8,6 +8,7 @@ interface Contact {
   name: string;
   email: string | null;
   phone: string | null;
+  mobile: string | null;
   company: string | null;
   job_title: string | null;
   address: string | null;
@@ -101,15 +102,15 @@ export default async (req: Request, context: Context) => {
     // POST /contacts
     if (req.method === "POST") {
       const body = await req.json();
-      const { name, email, phone, company, job_title, address, website, notes, tags } = body;
+      const { name, email, phone, mobile, company, job_title, address, website, notes, tags } = body;
 
       if (!name) {
         return new Response(JSON.stringify({ error: "Name is required" }), { status: 400, headers });
       }
 
       const result = await sql`
-        INSERT INTO contacts (name, email, phone, company, job_title, address, website, notes, tags)
-        VALUES (${name}, ${email || null}, ${phone || null}, ${company || null}, ${job_title || null}, ${address || null}, ${website || null}, ${notes || null}, ${tags || []})
+        INSERT INTO contacts (name, email, phone, mobile, company, job_title, address, website, notes, tags)
+        VALUES (${name}, ${email || null}, ${phone || null}, ${mobile || null}, ${company || null}, ${job_title || null}, ${address || null}, ${website || null}, ${notes || null}, ${tags || []})
         RETURNING *
       `;
 
@@ -119,7 +120,7 @@ export default async (req: Request, context: Context) => {
     // PUT /contacts/:id
     if (req.method === "PUT" && id) {
       const body = await req.json();
-      const { name, email, phone, company, job_title, address, website, notes, tags } = body;
+      const { name, email, phone, mobile, company, job_title, address, website, notes, tags } = body;
 
       const result = await sql`
         UPDATE contacts
@@ -127,6 +128,7 @@ export default async (req: Request, context: Context) => {
           name = COALESCE(${name}, name),
           email = ${email || null},
           phone = ${phone || null},
+          mobile = ${mobile || null},
           company = ${company || null},
           job_title = ${job_title || null},
           address = ${address || null},

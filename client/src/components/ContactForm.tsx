@@ -5,6 +5,7 @@ export interface ParsedContact {
   name: string;
   email: string;
   phone: string;
+  mobile: string;
   company: string;
   jobTitle: string;
   address: string;
@@ -76,28 +77,40 @@ export default function ContactForm({ initialData, onSave, onCancel, isLoading }
         />
       </div>
 
+      <div className="form-group">
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="email@example.com"
+        />
+      </div>
+
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="email@example.com"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="phone">Phone</label>
+          <label htmlFor="phone">Phone (Landline)</label>
           <input
             type="tel"
             id="phone"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="(555) 123-4567"
+            placeholder="+31352083205"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="mobile">Mobile</label>
+          <input
+            type="tel"
+            id="mobile"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            placeholder="+31651133473"
           />
         </div>
       </div>
@@ -131,12 +144,12 @@ export default function ContactForm({ initialData, onSave, onCancel, isLoading }
       <div className="form-group">
         <label htmlFor="website">Website</label>
         <input
-          type="url"
+          type="text"
           id="website"
           name="website"
           value={formData.website}
           onChange={handleChange}
-          placeholder="https://example.com"
+          placeholder="www.example.com"
         />
       </div>
 

@@ -14,11 +14,62 @@ A conference networking app that lets you scan business cards with your phone ca
 ## Tech Stack
 
 - **Frontend**: React 19 + TypeScript + Vite
-- **Backend**: Node.js + Express + TypeScript
+- **Backend**: Netlify Functions (serverless)
 - **Database**: Neon PostgreSQL (serverless)
 - **OCR**: Tesseract.js (client-side)
 
-## Getting Started
+## Deploy to Netlify
+
+### One-Click Deploy
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/SohniSwatantra/cardtocall)
+
+### Manual Deployment
+
+1. Fork or clone this repository to your GitHub account
+
+2. Go to [Netlify](https://app.netlify.com) and click "Add new site" → "Import an existing project"
+
+3. Connect your GitHub repository
+
+4. Configure build settings (should auto-detect from `netlify.toml`):
+   - **Base directory**: `client`
+   - **Build command**: `npm run build`
+   - **Publish directory**: `client/dist`
+
+5. Add environment variable in **Site Settings → Environment Variables**:
+   ```
+   DATABASE_URL = postgresql://user:password@host/database?sslmode=require
+   ```
+
+6. Deploy!
+
+### Database Setup
+
+1. Create a free database at [Neon](https://neon.tech)
+
+2. Copy your connection string from the Neon dashboard
+
+3. Run the migration to create the contacts table:
+   ```sql
+   CREATE TABLE IF NOT EXISTS contacts (
+     id SERIAL PRIMARY KEY,
+     name VARCHAR(255) NOT NULL,
+     email VARCHAR(255),
+     phone VARCHAR(50),
+     company VARCHAR(255),
+     job_title VARCHAR(255),
+     address TEXT,
+     website VARCHAR(255),
+     notes TEXT,
+     tags TEXT[] DEFAULT '{}',
+     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
+   You can run this in the Neon SQL Editor.
+
+## Local Development
 
 ### Prerequisites
 
@@ -70,11 +121,15 @@ cardtocall/
 │       ├── components/       # CameraCapture, ContactForm, Layout
 │       ├── pages/            # HomePage, ContactsPage, ContactDetailPage
 │       └── utils/            # API client, contact parser
-├── server/                   # Express backend
+├── netlify/
+│   └── functions/            # Netlify serverless functions
+│       └── contacts.ts       # Contacts API (CRUD + search)
+├── server/                   # Express backend (for local dev)
 │   └── src/
-│       ├── routes/           # API routes (contacts CRUD, search)
+│       ├── routes/           # API routes
 │       ├── migrations/       # Database schema
 │       └── db.ts             # Database connection
+├── netlify.toml              # Netlify configuration
 └── package.json              # Root scripts
 ```
 

@@ -1,0 +1,9 @@
+{
+  "name": "cardtocall-functions",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "@neondatabase/serverless": "^0.10.4",
+    "@netlify/functions": "^2.8.2"
+  }
+}

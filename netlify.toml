@@ -1,12 +1,12 @@
 [build]
   base = "client"
-  command = "npm run build"
+  command = "cd ../netlify/functions && npm install && cd ../../client && npm run build"
   publish = "dist"
   functions = "../netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["@neondatabase/serverless"]
+  external_node_modules = ["@neondatabase/serverless", "@anthropic-ai/sdk"]
 
 [[redirects]]
   from = "/api/*"

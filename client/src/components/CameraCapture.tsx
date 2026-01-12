@@ -7,18 +7,67 @@ interface CameraCaptureProps {
   capturedImage: string | null;
 }
 
+// Compress and resize image to reduce payload size
+function compressImage(file: File, maxWidth: number = 1600, quality: number = 0.8): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    img.onload = () => {
+      let { width, height } = img;
+
+      // Scale down if wider than maxWidth
+      if (width > maxWidth) {
+        height = (height * maxWidth) / width;
+        width = maxWidth;
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, width, height);
+        // Convert to JPEG for better compression
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve(dataUrl);
+      } else {
+        reject(new Error('Could not get canvas context'));
+      }
+    };
+
+    img.onerror = () => reject(new Error('Failed to load image'));
+
+    // Read file as data URL to load into image
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function CameraCapture({ onCapture, onRetake, capturedImage }: CameraCaptureProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const imageData = event.target?.result as string;
-        onCapture(imageData);
-      };
-      reader.readAsDataURL(file);
+      try {
+        // Compress image before processing
+        const compressedImage = await compressImage(file);
+        onCapture(compressedImage);
+      } catch (err) {
+        console.error('Image compression error:', err);
+        // Fallback to original if compression fails
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const imageData = event.target?.result as string;
+          onCapture(imageData);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 

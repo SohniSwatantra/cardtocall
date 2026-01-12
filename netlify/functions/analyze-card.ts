@@ -16,6 +16,7 @@ interface ContactData {
   name: string;
   email: string;
   phone: string;
+  mobile: string;
   company: string;
   job_title: string;
   address: string;
@@ -81,7 +82,8 @@ Return ONLY a valid JSON object with these exact fields (use empty string "" if 
 {
   "name": "Full name of the person",
   "email": "Email address",
-  "phone": "Phone number",
+  "phone": "Landline/office phone number",
+  "mobile": "Mobile/cell phone number",
   "company": "Company or organization name",
   "job_title": "Job title or position",
   "address": "Full address",
@@ -90,7 +92,10 @@ Return ONLY a valid JSON object with these exact fields (use empty string "" if 
 
 Important:
 - Extract exactly what you see on the card
-- For phone numbers, include the full number with any country codes
+- phone = landline/office number (usually starts with area code like +31 35...)
+- mobile = mobile/cell number (usually starts with +31 6... or similar mobile prefixes)
+- Format ALL phone numbers WITHOUT spaces or dashes (e.g., +31352083205 not +31 35 208 32 05)
+- Include country code with + prefix
 - For addresses, combine all address parts into one string
 - Return ONLY the JSON object, no additional text or markdown`,
             },

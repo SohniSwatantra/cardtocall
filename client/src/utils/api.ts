@@ -4,6 +4,7 @@ export interface AnalyzedContact {
   name: string;
   email: string;
   phone: string;
+  mobile: string;
   company: string;
   job_title: string;
   address: string;
@@ -30,6 +31,7 @@ export interface Contact {
   name: string;
   email: string | null;
   phone: string | null;
+  mobile: string | null;
   company: string | null;
   job_title: string | null;
   address: string | null;
@@ -44,6 +46,7 @@ export interface CreateContactData {
   name: string;
   email?: string;
   phone?: string;
+  mobile?: string;
   company?: string;
   job_title?: string;
   address?: string;

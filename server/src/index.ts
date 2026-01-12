@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { testConnection } from './db';
+import contactsRouter from './routes/contacts';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,6 +27,9 @@ app.get('/api/db-test', async (req, res) => {
     res.status(500).json({ status: 'error', message: errorMessage });
   }
 });
+
+// Register routes
+app.use('/api/contacts', contactsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

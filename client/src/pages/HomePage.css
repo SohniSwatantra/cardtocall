@@ -1,0 +1,34 @@
+.home-page {
+  text-align: center;
+}
+
+.home-page h1 {
+  margin-bottom: 0.5rem;
+}
+
+.home-description {
+  color: #a0a0a0;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.camera-placeholder {
+  background-color: #2a2a3e;
+  border: 2px dashed #4a4a6e;
+  border-radius: 12px;
+  padding: 3rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.camera-icon {
+  color: #646cff;
+  margin-bottom: 1rem;
+}
+
+.camera-placeholder p {
+  color: #a0a0a0;
+  margin: 0;
+}

@@ -1,12 +1,15 @@
 .contact-detail-page {
-  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 .back-link {
   display: inline-block;
-  color: #646cff;
+  color: #007bff;
   text-decoration: none;
   margin-bottom: 1.5rem;
+  font-size: 0.95rem;
 }
 
 .back-link:hover {
@@ -14,22 +17,389 @@
 }
 
 .contact-detail-card {
-  background-color: #2a2a3e;
+  background: #fff;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.contact-detail-card h1 {
-  margin-top: 0;
-  margin-bottom: 1rem;
+/* Header */
+.contact-header {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 1.5rem;
 }
 
-.contact-id {
-  color: #a0a0a0;
+.contact-avatar {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.contact-header-info {
+  flex: 1;
+}
+
+.contact-header-info h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  color: #212529;
+}
+
+.contact-header-info .job-title {
+  margin: 0 0 0.25rem;
+  color: #495057;
+  font-size: 0.95rem;
+}
+
+.contact-header-info .company {
+  margin: 0;
+  color: #6c757d;
   font-size: 0.9rem;
 }
 
-.coming-soon {
-  color: #a0a0a0;
+.contact-header-info input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-header-info input.edit-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Details */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detail-section h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+  font-weight: 600;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 500px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.detail-item label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-item p {
+  margin: 0;
+  color: #212529;
+}
+
+.detail-item a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.detail-item a:hover {
+  text-decoration: underline;
+}
+
+.detail-item input {
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.detail-section textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.notes-content {
+  margin: 0;
+  color: #495057;
+  white-space: pre-wrap;
+}
+
+.no-tags {
+  margin: 0;
+  color: #6c757d;
   font-style: italic;
+}
+
+/* Tags */
+.tags-display,
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  background: #e9ecef;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  color: #495057;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #6c757d;
+  line-height: 1;
+}
+
+.tag-remove:hover {
+  background: #dee2e6;
+  color: #dc3545;
+}
+
+.tags-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tag-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag-input-wrapper input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+}
+
+.btn-add-tag {
+  padding: 0.5rem 1rem;
+  background: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-add-tag:hover {
+  background: #dee2e6;
+}
+
+/* Edit Actions */
+.edit-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.edit-actions-right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Meta */
+.contact-meta {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.contact-meta p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: #fff;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #545b62;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #c82333;
+}
+
+/* Loading & Error */
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+}
+
+.loading-state p,
+.error-state p {
+  color: #6c757d;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e9ecef;
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+}
+
+.modal p {
+  margin: 0 0 1.5rem;
+  color: #495057;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Error Toast */
+.error-toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #dc3545;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1000;
+}
+
+.error-toast button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
 }

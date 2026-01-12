@@ -1,0 +1,35 @@
+# Ralph working files (generated during runs)
+prd.json
+progress.txt
+.last-branch
+
+# Archive is optional to commit
+# archive/
+
+# OS files
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo

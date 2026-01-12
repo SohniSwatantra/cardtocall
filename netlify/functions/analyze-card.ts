@@ -59,7 +59,7 @@ export default async (req: Request, context: Context) => {
     const base64Data = matches[2];
 
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-3-5-sonnet-20241022",
       max_tokens: 1024,
       messages: [
         {

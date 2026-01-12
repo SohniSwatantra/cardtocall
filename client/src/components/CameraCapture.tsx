@@ -22,8 +22,18 @@ export default function CameraCapture({ onCapture, onRetake, capturedImage }: Ca
       });
 
       if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-        await videoRef.current.play();
+        const video = videoRef.current;
+        video.srcObject = mediaStream;
+
+        // Wait for video to be ready before showing
+        await new Promise<void>((resolve, reject) => {
+          video.onloadedmetadata = () => {
+            video.play()
+              .then(() => resolve())
+              .catch(reject);
+          };
+          video.onerror = () => reject(new Error('Video failed to load'));
+        });
       }
       setStream(mediaStream);
       setIsCameraActive(true);

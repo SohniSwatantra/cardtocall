@@ -1,0 +1,38 @@
+.auth-page {
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-page .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+.auth-page .back-link:hover {
+  color: var(--text-primary);
+}
+
+.auth-container {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.auth-container h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.auth-description {
+  margin: 0 0 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}

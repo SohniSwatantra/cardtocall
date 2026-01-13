@@ -97,7 +97,7 @@ export default function ContactDetailPage() {
     if (!id) return;
     try {
       await deleteContact(parseInt(id, 10));
-      navigate('/contacts');
+      navigate('/app/contacts');
     } catch (err) {
       console.error('Failed to delete:', err);
       setError('Failed to delete contact. Please try again.');
@@ -127,7 +127,7 @@ export default function ContactDetailPage() {
       <div className="contact-detail-page">
         <div className="error-state">
           <p>{error}</p>
-          <Link to="/contacts" className="btn btn-primary">Back to Contacts</Link>
+          <Link to="/app/contacts" className="btn btn-primary">Back to Contacts</Link>
         </div>
       </div>
     );
@@ -138,7 +138,7 @@ export default function ContactDetailPage() {
       <div className="contact-detail-page">
         <div className="error-state">
           <p>Contact not found</p>
-          <Link to="/contacts" className="btn btn-primary">Back to Contacts</Link>
+          <Link to="/app/contacts" className="btn btn-primary">Back to Contacts</Link>
         </div>
       </div>
     );
@@ -146,7 +146,7 @@ export default function ContactDetailPage() {
 
   return (
     <div className="contact-detail-page">
-      <Link to="/contacts" className="back-link">
+      <Link to="/app/contacts" className="back-link">
         ← Back to Contacts
       </Link>
 

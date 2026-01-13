@@ -149,7 +149,7 @@ export default function HomePage() {
             <button onClick={handleScanAnother} className="btn btn-secondary">
               Scan Another
             </button>
-            <button onClick={() => navigate('/contacts')} className="btn btn-primary">
+            <button onClick={() => navigate('/app/contacts')} className="btn btn-primary">
               View Contacts
             </button>
           </div>

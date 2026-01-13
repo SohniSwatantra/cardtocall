@@ -33,7 +33,21 @@ export default async (req: Request, context: Context) => {
   }
 
   const url = new URL(req.url);
-  const pathParts = url.pathname.replace("/.netlify/functions/contacts", "").split("/").filter(Boolean);
+  console.log("Request URL:", req.url);
+  console.log("Pathname:", url.pathname);
+
+  // Handle both direct function calls and proxied /api/contacts calls
+  let pathParts: string[];
+  if (url.pathname.startsWith("/.netlify/functions/contacts")) {
+    pathParts = url.pathname.replace("/.netlify/functions/contacts", "").split("/").filter(Boolean);
+  } else if (url.pathname.startsWith("/api/contacts")) {
+    pathParts = url.pathname.replace("/api/contacts", "").split("/").filter(Boolean);
+  } else {
+    pathParts = url.pathname.split("/").filter(Boolean);
+  }
+
+  console.log("Path parts:", pathParts);
+
   const id = pathParts[0] && !isNaN(Number(pathParts[0])) ? Number(pathParts[0]) : null;
   const isSearch = pathParts[0] === "search";
 

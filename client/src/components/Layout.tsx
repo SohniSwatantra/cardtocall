@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { UserButton } from '@neondatabase/auth/react/ui';
 import { authClient } from '../auth';
 import './Layout.css';
 
@@ -14,6 +13,17 @@ export default function Layout() {
       navigate('/');
     }
   }, [session, navigate]);
+
+  const handleSignOut = useCallback(async () => {
+    try {
+      await authClient.signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Sign out error:', error);
+      // Force redirect even if sign out fails
+      navigate('/');
+    }
+  }, [navigate]);
 
   // Show loading while checking auth
   if (session.isPending) {
@@ -53,9 +63,9 @@ export default function Layout() {
               Contacts
             </NavLink>
           </nav>
-          <div className="header-user">
-            <UserButton />
-          </div>
+          <button onClick={handleSignOut} className="sign-out-btn">
+            Sign Out
+          </button>
         </div>
       </header>
       <main className="app-main">

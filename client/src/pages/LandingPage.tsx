@@ -160,6 +160,117 @@ export default function LandingPage() {
               <p>Designed for on-the-go scanning</p>
             </div>
           </div>
+
+          {/* Pricing Section */}
+          <div className="pricing-section">
+            <h2>Simple Pricing</h2>
+            <p className="pricing-tagline">Choose the plan that works for you</p>
+
+            <div className="pricing-cards">
+              <div className="pricing-card">
+                <h3>Starter</h3>
+                <div className="price">
+                  <span className="amount">$9.99</span>
+                </div>
+                <ul className="features-list">
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    40 card scans
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    AI-powered extraction
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Export to CSV
+                  </li>
+                </ul>
+                <Link to="/sign-up" className="btn btn-secondary pricing-btn">
+                  Get Started
+                </Link>
+              </div>
+
+              <div className="pricing-card featured">
+                <div className="badge">Popular</div>
+                <h3>Pro</h3>
+                <div className="price">
+                  <span className="amount">$19.99</span>
+                </div>
+                <ul className="features-list">
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    40 card scans
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Email verification
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    AI-powered extraction
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Export to CSV & vCard
+                  </li>
+                </ul>
+                <Link to="/sign-up" className="btn btn-primary pricing-btn">
+                  Get Started
+                </Link>
+              </div>
+
+              <div className="pricing-card">
+                <h3>Business</h3>
+                <div className="price">
+                  <span className="amount">$34.99</span>
+                </div>
+                <ul className="features-list">
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    100 card scans
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    100 email verifications
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    AI-powered extraction
+                  </li>
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Export to CSV & vCard
+                  </li>
+                </ul>
+                <Link to="/sign-up" className="btn btn-secondary pricing-btn">
+                  Get Started
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 

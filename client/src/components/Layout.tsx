@@ -8,10 +8,10 @@ export default function Layout() {
   const navigate = useNavigate();
   const session = authClient.useSession();
 
-  // Redirect to sign-in if not authenticated
+  // Redirect to landing page if not authenticated
   useEffect(() => {
     if (!session.isPending && !session.data?.user) {
-      navigate('/sign-in');
+      navigate('/');
     }
   }, [session, navigate]);
 

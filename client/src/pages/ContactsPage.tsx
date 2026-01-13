@@ -176,7 +176,7 @@ export default function ContactsPage() {
           ) : (
             <>
               <p>No contacts yet</p>
-              <Link to="/" className="scan-link">
+              <Link to="/app" className="scan-link">
                 Scan a business card to add your first contact
               </Link>
             </>
@@ -185,7 +185,7 @@ export default function ContactsPage() {
       ) : (
         <div className="contacts-list">
           {contacts.map(contact => (
-            <Link to={`/contacts/${contact.id}`} key={contact.id} className="contact-row">
+            <Link to={`/app/contacts/${contact.id}`} key={contact.id} className="contact-row">
               <div className="contact-avatar">
                 {contact.name.charAt(0).toUpperCase()}
               </div>

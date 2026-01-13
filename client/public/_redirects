@@ -1,7 +1,7 @@
 # API redirects to Netlify Functions
 /api/analyze-card       /.netlify/functions/analyze-card       200
 /api/contacts/search    /.netlify/functions/contacts/search    200
-/api/contacts/:id       /.netlify/functions/contacts/:id       200
+/api/contacts/*         /.netlify/functions/contacts/:splat    200
 /api/contacts           /.netlify/functions/contacts           200
 
 # SPA fallback - must be last
